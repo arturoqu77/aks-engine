@@ -1,0 +1,79 @@
+{
+  "apiVersion": "vlabs",
+  "properties": {
+    "orchestratorProfile": {
+      "orchestratorType": "Kubernetes",
+      "orchestratorRelease": "1.19.0",
+      "kubernetesConfig": {
+        "networkPlugin": "azure",
+        "containerRuntime": "containerd",
+        "addons": [
+          {
+            "name": "container-monitoring",
+            "enabled": true
+          },
+          {
+            "name": "kubernetes-dashboard",
+            "enabled" : true
+          }
+        ]
+      }
+    },
+    "masterProfile": {
+      "count": 2,
+      "dnsPrefix": "",
+      "vmSize": "Standard_D2_v3",
+      "availabilityProfile": "VirtualMachineScaleSets"
+    },
+    "agentPoolProfiles": [
+      {
+        "name": "linuxagentpool1",
+        "count": 3,
+        "vmSize": "Standard_D2_v3",
+        "osType" : "Linux",
+        "availabilityProfile": "VirtualMachineScaleSets"
+        "extensions": [
+            {
+              "name": "prometheus-grafana-k8s"
+            }
+        ]
+      },
+      {
+        "name": "winagentpool1",
+        "count": 1,
+        "vmSize": "Standard_D2_v3",
+        "osType": "Windows",
+        "availabilityProfile": "VirtualMachineScaleSets"
+      }
+    ],
+    "linuxProfile": {
+      "adminUsername": "azureuser",
+      "ssh": {
+        "publicKeys": [
+          {
+            "keyData": ""
+          }
+        ]
+    }  
+},
+    "extensionProfiles": [
+            {
+              "name": "prometheus-grafana-k8s",
+              "version": "v1",
+              "rootURL": "https://raw.githubusercontent.com/Azure/aks-engine/master/"
+            }
+          ],
+    "windowsProfile": [ 
+          {
+            "adminUsername": "azureuser",
+            "adminPassword": "Pafnucio.7286",
+            "enableAutomaticUpdates": true,
+            "sshEnabled": true,
+            "windowsPublisher": "MicrosoftWindowsServer",
+            "windowsOffer": "WindowsServer",
+            "windowsSku": "2019-datacenter-core-with-containers-smalldisk-g2",
+            "imageVersion": "latest"
+          }
+        ]
+  }
+}

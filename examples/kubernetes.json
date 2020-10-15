@@ -5,19 +5,21 @@
       "orchestratorType": "Kubernetes"
     },
     "masterProfile": {
-      "count": 1,
+      "count": 3,
       "dnsPrefix": "",
-      "vmSize": "Standard_D2_v3"
+      "vmSize": "Standard_D2_v3",
+      "availabilityProfile": "VirtualMachineScaleSets"
     },
     "agentPoolProfiles": [
       {
         "name": "agentpool1",
-        "count": 2,
-        "vmSize": "Standard_D2_v3"
+        "count": 3,
+        "vmSize": "Standard_D2_v3",
+        "availabilityProfile": "VirtualMachineScaleSets"
       }
     ],
     "linuxProfile": {
-      "adminUsername": "azureuser",
+      "adminUsername": "arturoqu",
       "ssh": {
         "publicKeys": [
           {
@@ -25,6 +27,11 @@
           }
         ]
       }
+    },
+    "servicePrincipalProfile": {
+      "clientId": "",
+      "secret": ""
     }
   }
 }
+
